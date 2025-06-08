@@ -4,15 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (scrollArrow) {
         scrollArrow.addEventListener('click', function(event) {
-            // Prevent the default anchor link behavior (the sudden jump)
             event.preventDefault();
 
-            // Get the target element's ID from the href attribute
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                // Use the modern, built-in smooth scrolling API
                 targetElement.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
@@ -26,5 +23,32 @@ document.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
     document.getElementById("welcome-screen").style.display = "none";
     document.getElementById("main-content").style.display = "block";
-  }, 3000); // Matches the 3s animation duration
+  }, 3000); 
+});
+
+document.querySelector("form").addEventListener("submit", function (e) {
+  let hasError = false;
+
+  document.querySelectorAll(".error").forEach(el => el.classList.remove("error"));
+
+  this.querySelectorAll("input[type='text']").forEach(input => {
+    if (!input.value.trim()) {
+      input.classList.add("error");
+      hasError = true;
+    }
+  });
+  const radioGroups = ["C2_PER_COM", "C2_OPER_EX"];
+  radioGroups.forEach(id => {
+    const group = document.getElementById(id);
+    const inputs = group.querySelectorAll("input[type='radio']");
+    const isChecked = [...inputs].some(input => input.checked);
+    if (!isChecked) {
+      group.classList.add("error");
+      hasError = true;
+    }
+  });
+
+  if (hasError) {
+    e.preventDefault();
+  }
 });
