@@ -545,6 +545,28 @@ form button[type="submit"]:hover {
   background-color: #005fa3;
 }
 
+/* Error bounce animation */
+@keyframes bounceError {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-10px); }
+  80% { transform: translateX(10px); }
+  100% { transform: translateX(0); }
+}
+
+.error {
+  border: 2px solid red !important;
+  animation: bounceError 0.5s;
+}
+
+.radio-group.error {
+  border: 2px solid red;
+  padding: 10px;
+  animation: bounceError 0.5s;
+  border-radius: 4px;
+}
+
 
 @keyframes fadeOut {
   0% {
