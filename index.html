@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="index.html" class="logo">
+            <img src="Photos_Videos/DOD logo.png" alt="CMMD Logo" class="logo-icon">
+        <h1>CMMD</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            </nav>
+    </div>
+</header>
+    <main class="hero-container">
+
+        <div class="image-container">
+            <img src="Photos_Videos/soilders.png"
+                 alt="Soilders Running" loading="lazy" class="hero-image">
+        </div>
+
+        <div class="text-container">
+            <div class="text-content">
+                <h1>CMMD</h1>
+                <p>
+                    CMMD is a Machine Learning Model Project that utilizes multimodal data to generate 
+                    a comprehensive classification of the input data, seperated typically between three classes,
+                    Complementary, Similar and Unrelated.
+                    <br><br>
+                </p>
+            </div>
+        </div>
+
+        <!-- === HIGHLIGHTED ARROW === -->
+        <a href="#next-section" class="scroll-down-arrow" aria-label="Scroll to next section">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </a>
+
+    </main>
+
+    <!-- This is a dummy section for the arrow to scroll to -->
+    <section id="next-section" style="height: 100vh; display: grid; place-content: center; ">
+        <main class="hero-container">
+
+        <div class="text-container">
+            <div class="text-content">
+                
+                <h2>Current Model</h2>
+                <p>
+                    Army Personnel typically go into a military situation with many unknwown variables, these variables can range anywhere from unforseen enviormental factors, hidden enemy contacts and a lack of knowledge on the enemies intentions.
+                    <br><br>
+                </p>
+                        
+            </div>
+        </div>
+        <div class="image-container1">
+                    <img src="Photos_Videos/180621SNIPER_photo02.jpg"
+                 alt="Sniper Soilder" loading="lazy" class="hero-image">
+                </div>
+        <a href="#next-section1" class="scroll-down-arrow" aria-label="Scroll to next section">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            
+        </a>
+        
+    </main>
+    </section>
+    <section id="next-section1" style="height: 100vh; display: grid; place-content: center; ">
+        <main class="hero-container">
+        <div class="image-container_fir">
+              <a href="Photos_Videos/Screen Shot 2017-08-12 at 12.54.15 PM.png" target="_blank">
+                    <img src="Photos_Videos/Screen Shot 2017-08-12 at 12.54.15 PM.png"
+                 alt="Sniper Soilder" loading="lazy" class="hero-image">
+                </a>
+                <a href="Photos_Videos/operation-fulminate-after-action-report-template-aar-v0-5iw5fmzs9ubb1.jpg" target="_blank">
+                 <img src="Photos_Videos/operation-fulminate-after-action-report-template-aar-v0-5iw5fmzs9ubb1.jpg"
+                 alt="Sniper Soilder" loading="lazy" class="hero-image">
+                </a>
+                <a href="CMMD_simu.html" class="nav-button">CMMD RISK CHOICE SIMULATOR</a>
+                </div>
+            
+
+        <div class="text-container_fir">
+            <div class="text-content_fir">
+                
+                <h2>Corrections to Current Model</h2>
+                <p>
+                    Usually after going through a military situation, regardless of mission success or failure, army personnel,
+                    have to fill out associated paperwork in relation to the mission based on a set of predefined rubrics given to us
+                    by the military, but these rubrics are either too vague or non specific to grasp the severity of a situation.
+                    <br><br>
+                </p>
+                <p>
+                    So to leverage our current Machine Learning Model, we beleive that by redefining these set standards to clearly define
+                    risk factors, we can not only accurately classify specific situations, but integrate machine learning models to help us understand mission data
+                    and make specified recommendations based on the key inputs given to us by military personnel.
+                    <br><br>
+                </p>
+                        
+            </div>
+        </div>
+        
+    </main>
+    </section>
+    <!-- Your Custom JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>

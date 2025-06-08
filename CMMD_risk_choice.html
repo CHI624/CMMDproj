@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="index.html" class="logo">
+            <img src="Photos_Videos/DOD logo.png" alt="CMMD Logo" class="logo-icon">
+        <h1>CMMD</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            </nav>
+    </div>
+</header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Risk Choice Simulator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Welcome Screen -->
+  <div id="welcome-screen" class="fade-screen">
+    <h1>Welcome to the RISK Choice Simulator</h1>
+  </div>
+
+  <!-- Main Content (Form) -->
+  <main id="main-content" style="display: none;">
+    <h2>Please Fill Out the Form</h2>
+    <form action="/CMMDprog/submit.php" method="POST">
+    <label for="name">DATE OF OPERATION (MM/DD/YYYY):</label><br />
+    <input type="text" id="C2_PER_OP" name="C2_PER_OP" required /><br /><br />
+
+    <label for="name">C2 PERSONNEL NAME:</label><br />
+      <input type="text" id="C2_PER_N" name="C2_PER_N" required /><br /><br />
+
+      <label for="name">C2 PERSONNEL EXPERIENCE(KERNEL, GENERAL, etc...):</label><br />
+      <input type="text" id="C2_PER_EX" name="C2_PER_EX" required /><br /><br />
+
+      <label for="rank">C2 PERSONNEL EXPERIENCE INSIGHTS:</label><br />
+      <input type="text" id="C2_PER_IN" name="C2_PER_IN" required /><br /><br />
+
+    <label for="C2_PER_COM">C2 PERSONNEL TECHNICAL COMPETENCY (RANK 1 – 10):</label><br />
+    <div class="radio-group" id="C2_PER_COM">
+      <!-- 1 to 10 Radio Buttons -->
+      <label><input type="radio" name="C2_PER_COM" value="1" required>1</label>
+      <label><input type="radio" name="C2_PER_COM" value="2">2</label>
+      <label><input type="radio" name="C2_PER_COM" value="3">3</label>
+      <label><input type="radio" name="C2_PER_COM" value="4">4</label>
+      <label><input type="radio" name="C2_PER_COM" value="5">5</label>
+      <label><input type="radio" name="C2_PER_COM" value="6">6</label>
+      <label><input type="radio" name="C2_PER_COM" value="7">7</label>
+      <label><input type="radio" name="C2_PER_COM" value="8">8</label>
+      <label><input type="radio" name="C2_PER_COM" value="9">9</label>
+      <label><input type="radio" name="C2_PER_COM" value="10">10</label>
+    </div>
+    <br /><br />
+
+      <label for="unit">C2 OPERATIONAL EXPERIENCE(RANK 1 - 10):</label><br />
+    <div class="radio-group" id="C2_OPER_EX">
+      <!-- 1 to 10 Radio Buttons -->
+      <label><input type="radio" name="C2_OPER_EX" value="1" required>1</label>
+      <label><input type="radio" name="C2_OPER_EX" value="2">2</label>
+      <label><input type="radio" name="C2_OPER_EX" value="3">3</label>
+      <label><input type="radio" name="C2_OPER_EX" value="4">4</label>
+      <label><input type="radio" name="C2_OPER_EX" value="5">5</label>
+      <label><input type="radio" name="C2_OPER_EX" value="6">6</label>
+      <label><input type="radio" name="C2_OPER_EX" value="7">7</label>
+      <label><input type="radio" name="C2_OPER_EX" value="8">8</label>
+      <label><input type="radio" name="C2_OPER_EX" value="9">9</label>
+      <label><input type="radio" name="C2_OPER_EX" value="10">10</label>
+    </div>
+          <label for="name">C2 LESSONS LEARNED:</label><br />
+      <input type="text" id="C2_LESSONS" name="C2_LESSONS" required /><br /><br />
+    <br /><br />
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
