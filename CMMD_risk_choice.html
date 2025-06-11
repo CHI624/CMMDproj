@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Website Name | Home</title>
     
-    <!-- Google Fonts for aesthetics -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
-    <!-- Your Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,10 +16,11 @@
     <div class="header-content">
         <a href ="index.html" class="logo">
             <img src="Photos_Videos/DOD logo.png" alt="CMMD Logo" class="logo-icon">
-        <h1>CMMD</h1>
+        <h1>ARMOR</h1>
         </a>
         <nav class="nav-menu">
             <a href="index.html">Home</a>
+            <a href="CMMD_risk_choice.html">ARMOR</a>
             <a href="about.html">About</a>
             <a href="projects.html">Projects</a>
             </nav>
@@ -35,64 +34,402 @@
 </head>
 <body>
 
-  <!-- Welcome Screen -->
   <div id="welcome-screen" class="fade-screen">
     <h1>Welcome to the RISK Choice Simulator</h1>
-  </div>
-
-  <!-- Main Content (Form) -->
+  </div> 
+  
   <main id="main-content" style="display: none;">
     <h2>Please Fill Out the Form</h2>
-    <form action="/CMMDprog/submit.php" method="POST">
+    <form id = "combinedForm" method="POST" action="/CMMDproj/final_submit.php">
+     <section id = "form1">
     <label for="name">DATE OF OPERATION (MM/DD/YYYY):</label><br />
     <input type="text" id="C2_PER_OP" name="C2_PER_OP" required /><br /><br />
 
     <label for="name">C2 PERSONNEL NAME:</label><br />
       <input type="text" id="C2_PER_N" name="C2_PER_N" required /><br /><br />
+    
+<label for="rank">C2 PERSONNEL EXPERIENCE (MOS#/NAME):</label><br />
+<select id="C2_PER_EX" name="C2_PER_EX" required>
+  <option value="">-- Select MOS and Name --</option>
+</select>
 
-      <label for="name">C2 PERSONNEL EXPERIENCE(KERNEL, GENERAL, etc...):</label><br />
-      <input type="text" id="C2_PER_EX" name="C2_PER_EX" required /><br /><br />
+<script>
+fetch('mos_table.csv')
+  .then(response => {
+    if (!response.ok) throw new Error('Network response was not ok');
+    return response.text();
+  })
+  .then(text => {
+    const lines = text.trim().split('\n');
+    for(let i = 1; i < lines.length; i++) {
+      // Split on comma, but trim spaces just in case
+      const [Mos, Name] = lines[i].split(',').map(s => s.trim());
+      if(Mos && Name) {
+        const optionValue = `${Mos} ${Name}`;
+        const option =  document.createElement('option');
+        option.value = optionValue;
+        option.textContent = optionValue;
+        document.getElementById('C2_PER_EX').appendChild(option);
+      }
+    }
+  })
+  .catch(err => console.error('Error loading CSV:', err));
+</script>
 
-      <label for="rank">C2 PERSONNEL EXPERIENCE INSIGHTS:</label><br />
+
+      <label for="rank">RANK(Enlisted, Officer, Warrant Officer):</label><br />
+      <select id="RANK" name="RANK" required>
+      <option value ="">-- Select Rank --</option>
+      <option value="Enlisted">Enlisted</option>
+      <option value="Officer">Officer</option>
+      <option value="Warrant Officer">Warrant Officer</option>
+      </select>
+      <br /><br />
+      <label for="rank">DATE OF OPERATION(DATE OF SPECIFIC INCIDENT MM/DD/YYYY):</label><br />
+      <input type="text" id="DATE_OPER" name="DATE_OPER" required /><br /><br />
+
+      <label for="rank">LOCATION OF OPERATION(Address, Town, State):</label><br />
+      <input type="text" id="LOC_OPER" name="LOC_OPER" required /><br /><br />
+
+      <label for="rank">C2 PERSONNEL EXPERIENCE INSIGHTS(Description of Mission):</label><br />
       <input type="text" id="C2_PER_IN" name="C2_PER_IN" required /><br /><br />
 
     <label for="C2_PER_COM">C2 PERSONNEL TECHNICAL COMPETENCY (RANK 1 – 10):</label><br />
     <div class="radio-group" id="C2_PER_COM">
-      <!-- 1 to 10 Radio Buttons -->
       <label><input type="radio" name="C2_PER_COM" value="1" required>1</label>
-      <label><input type="radio" name="C2_PER_COM" value="2">2</label>
-      <label><input type="radio" name="C2_PER_COM" value="3">3</label>
-      <label><input type="radio" name="C2_PER_COM" value="4">4</label>
-      <label><input type="radio" name="C2_PER_COM" value="5">5</label>
-      <label><input type="radio" name="C2_PER_COM" value="6">6</label>
-      <label><input type="radio" name="C2_PER_COM" value="7">7</label>
-      <label><input type="radio" name="C2_PER_COM" value="8">8</label>
-      <label><input type="radio" name="C2_PER_COM" value="9">9</label>
-      <label><input type="radio" name="C2_PER_COM" value="10">10</label>
+      <label><input type="radio" name="C2_PER_COM" value="2"required>2</label>
+      <label><input type="radio" name="C2_PER_COM" value="3"required>3</label>
+      <label><input type="radio" name="C2_PER_COM" value="4"required>4</label>
+      <label><input type="radio" name="C2_PER_COM" value="5"required>5</label>
+      <label><input type="radio" name="C2_PER_COM" value="6"required>6</label>
+      <label><input type="radio" name="C2_PER_COM" value="7"required>7</label>
+      <label><input type="radio" name="C2_PER_COM" value="8"required>8</label>
+      <label><input type="radio" name="C2_PER_COM" value="9"required>9</label>
+      <label><input type="radio" name="C2_PER_COM" value="10"required>10</label>
     </div>
     <br /><br />
 
       <label for="unit">C2 OPERATIONAL EXPERIENCE(RANK 1 - 10):</label><br />
     <div class="radio-group" id="C2_OPER_EX">
-      <!-- 1 to 10 Radio Buttons -->
       <label><input type="radio" name="C2_OPER_EX" value="1" required>1</label>
-      <label><input type="radio" name="C2_OPER_EX" value="2">2</label>
-      <label><input type="radio" name="C2_OPER_EX" value="3">3</label>
-      <label><input type="radio" name="C2_OPER_EX" value="4">4</label>
-      <label><input type="radio" name="C2_OPER_EX" value="5">5</label>
-      <label><input type="radio" name="C2_OPER_EX" value="6">6</label>
-      <label><input type="radio" name="C2_OPER_EX" value="7">7</label>
-      <label><input type="radio" name="C2_OPER_EX" value="8">8</label>
-      <label><input type="radio" name="C2_OPER_EX" value="9">9</label>
-      <label><input type="radio" name="C2_OPER_EX" value="10">10</label>
+      <label><input type="radio" name="C2_OPER_EX" value="2"required>2</label>
+      <label><input type="radio" name="C2_OPER_EX" value="3"required>3</label>
+      <label><input type="radio" name="C2_OPER_EX" value="4"required>4</label>
+      <label><input type="radio" name="C2_OPER_EX" value="5"required>5</label>
+      <label><input type="radio" name="C2_OPER_EX" value="6"required>6</label>
+      <label><input type="radio" name="C2_OPER_EX" value="7"required>7</label>
+      <label><input type="radio" name="C2_OPER_EX" value="8"required>8</label>
+      <label><input type="radio" name="C2_OPER_EX" value="9"required>9</label>
+      <label><input type="radio" name="C2_OPER_EX" value="10"required>10</label>
     </div>
           <label for="name">C2 LESSONS LEARNED:</label><br />
       <input type="text" id="C2_LESSONS" name="C2_LESSONS" required /><br /><br />
     <br /><br />
-      <button type="submit">Submit</button>
-    </form>
-  </main>
+    <label for="mission_image">Select an image of the Mission Location(OPTIONAL):</label><br />
+        <input type="file" id="MISS_IMAGE" name="MISS_IMAGE" accept="image/*" /><br /><br />
 
+        <!-- Audio Input -->
+        <label for="mission_audio">Select an audio in relation to the mission insights(OPTIONAL):</label><br />
+        <input type="file" id="MISS_AUDIO" name="MISS_AUDIO" accept="audio/*" /><br /><br />
+
+        <button type="button" id="nextToForm2">Next</button>
+</section>
+  <script>
+  // Validation function for Form 1
+  function validateForm1() {
+    const requiredRadios = document.querySelectorAll('#form1 [required]');
+    const grouped = {};
+
+    // Group radio buttons by their name
+    requiredRadios.forEach(input => {
+      if (input.type === 'radio') {
+        if (!grouped[input.name]) grouped[input.name] = [];
+        grouped[input.name].push(input);
+      }
+    });
+
+    // Check if at least one radio is selected per group
+    for (let name in grouped) {
+      const group = grouped[name];
+      const oneChecked = group.some(input => input.checked);
+      if (!oneChecked) {
+        alert('Please complete all required questions in Form 1.');
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  // Only add ONE event listener for the "Next" button
+  document.getElementById('nextToForm2').addEventListener('click', function () {
+    if (validateForm1()) {
+      // Hide Form 1, show Form 2
+      document.getElementById('form1').style.display = 'none';
+      document.getElementById('form2').style.display = 'block';
+    }
+  });
+</script>
+  <section id="form2" style="display: none;">
+    <div class = "form2-wrapper">
+    <h2>Risk Analysis (Probability)</h2>
+    <label for="EXPOSED_HAZ">Likelihood of exposure to the hazard:</label>
+    <div class="radio-group" id="EXPOSED_HAZ">
+      <label><input type="radio" name="EXPOSED_HAZ" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="EXPOSED_HAZ" value="2">2</label>
+      <label><input type="radio" name="EXPOSED_HAZ" value="3">3</label>
+      <label><input type="radio" name="EXPOSED_HAZ" value="4">4</label>
+      <label><input type="radio" name="EXPOSED_HAZ" value="5">(Highly Likely) 5</label>
+    </div>
+
+    <label>Have you experienced a similar hazard before?</label>
+    <div class="radio-group" id="experienced_hazard">
+      <label><input type="radio" name="experienced_hazard" value="yes" required>Yes</label>
+      <label><input type="radio" name="experienced_hazard" value="no">No</label>
+    </div>
+
+    <div id="past_hazard_section" style="display: none;">
+      <label for="PAST_HAZ">How problematic was the previous hazard?</label>
+      <div class="radio-group" id="PAST_HAZ">
+        <label><input type="radio" name="PAST_HAZ" value="1">(Not Problematic) 1</label>
+        <label><input type="radio" name="PAST_HAZ" value="2">2</label>
+        <label><input type="radio" name="PAST_HAZ" value="3">3</label>
+        <label><input type="radio" name="PAST_HAZ" value="4">4</label>
+        <label><input type="radio" name="PAST_HAZ" value="5">(Very Problematic) 5</label>
+      </div>
+    </div>
+
+    <label for="IMMEDIATE_HAZ">Immediate threat to mission:</label>
+    <div class="radio-group" id="IMMEDIATE_HAZ">
+      <label><input type="radio" name="IMMEDIATE_HAZ" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="IMMEDIATE_HAZ" value="2">2</label>
+      <label><input type="radio" name="IMMEDIATE_HAZ" value="3">3</label>
+      <label><input type="radio" name="IMMEDIATE_HAZ" value="4">4</label>
+      <label><input type="radio" name="IMMEDIATE_HAZ" value="5">(Highly Likely) 5</label>
+    </div>
+
+    <!-- Severity Section -->
+    <h2>Risk Analysis (Severity)</h2>
+    <h3>Indicate the likelihood of the present hazard potentially resulting in 
+        each of the following(1-4):</h3>
+<label for="unit">Complete Mission Failure:</label><br />
+    <div class="radio-group" id="COMPLETE_MISSION">
+      <label><input type="radio" name="COMPLETE_MISSION" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="COMPLETE_MISSION" value="2"required>2</label>
+      <label><input type="radio" name="COMPLETE_MISSION" value="3"required>3</label>
+      <label><input type="radio" name="COMPLETE_MISSION" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Loss of the ability to complete the mission:</label><br />
+    <div class="radio-group" id="LOSS_MISSION">
+      <label><input type="radio" name="LOSS_MISSION" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="LOSS_MISSION" value="2"required>2</label>
+      <label><input type="radio" name="LOSS_MISSION" value="3"required>3</label>
+      <label><input type="radio" name="LOSS_MISSION" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Death:</label><br />
+    <div class="radio-group" id="DEATH">
+      <label><input type="radio" name="DEATH" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="DEATH" value="2"required>2</label>
+      <label><input type="radio" name="DEATH" value="3"required>3</label>
+      <label><input type="radio" name="DEATH" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Permanant Disability:</label><br />
+    <div class="radio-group" id="PERM_DISABILITY">
+      <label><input type="radio" name="PERM_DISABILITY" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="PERM_DISABILITY" value="2"required>2</label>
+      <label><input type="radio" name="PERM_DISABILITY" value="3"required>3</label>
+      <label><input type="radio" name="PERM_DISABILITY" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Loss of Equipment:</label><br />
+    <div class="radio-group" id="LOSS_EQUIPMENT">
+      <label><input type="radio" name="LOSS_EQUIPMENT" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="LOSS_EQUIPMENT" value="2"required>2</label>
+      <label><input type="radio" name="LOSS_EQUIPMENT" value="3"required>3</label>
+      <label><input type="radio" name="LOSS_EQUIPMENT" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Property Damage:</label><br />
+    <div class="radio-group" id="PROPERTY_DAMAGE">
+      <label><input type="radio" name="PROPERTY_DAMAGE" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="PROPERTY_DAMAGE" value="2"required>2</label>
+      <label><input type="radio" name="PROPERTY_DAMAGE" value="3"required>3</label>
+      <label><input type="radio" name="PROPERTY_DAMAGE" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Facility Damage:</label><br />
+    <div class="radio-group" id="FACILITY_DAMAGE">
+      <label><input type="radio" name="FACILITY_DAMAGE" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="FACILITY_DAMAGE" value="2"required>2</label>
+      <label><input type="radio" name="FACILITY_DAMAGE" value="3"required>3</label>
+      <label><input type="radio" name="FACILITY_DAMAGE" value="4"required>(Highly Likely) 4</label>
+    </div>
+    <label for="unit">Collateral Damage:</label><br />
+    <div class="radio-group" id="COLLATERAL_DAMAGE">
+      <label><input type="radio" name="COLLATERAL_DAMAGE" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="COLLATERAL_DAMAGE" value="2"required>2</label>
+      <label><input type="radio" name="COLLATERAL_DAMAGE" value="3"required>3</label>
+      <label><input type="radio" name="COLLATERAL_DAMAGE" value="4"required>(Highly Likely) 4</label>
+    </div>
+    <!-- Repeatable block for each consequence -->
+    <div id="severityFields"></div>
+
+    <!-- Hidden Inputs -->
+    <input type="hidden" id="RISK_SCORE" name="RISK_SCORE" />
+    <input type="hidden" id="RISK_SCORE_LABEL" name="RISK_SCORE_LABEL" />
+    <input type="hidden" id="SEVERITY_SCORE" name="SEVERITY_SCORE" />
+    <input type="hidden" id="SEVERITY_SCORE_LABEL" name="SEVERITY_SCORE_LABEL" />
+    <input type="hidden" id="FINAL_RISK_LEVEL" name="FINAL_RISK_LEVEL" />
+<script>
+  // Show/hide past hazard question
+  
+  const severityQuestions = [
+    ['COMPLETE_MISSION', 'Complete Mission Failure'],
+    ['LOSS_MISSION', 'Loss of the ability to complete the mission'],
+    ['DEATH', 'Death'],
+    ['PERM_DISABILITY', 'Permanent Disability'],
+    ['LOSS_EQUIPMENT', 'Loss of Equipment'],
+    ['PROPERTY_DAMAGE', 'Property Damage'],
+    ['FACILITY_DAMAGE', 'Facility Damage'],
+    ['COLLATERAL_DAMAGE', 'Collateral Damage']
+  ];
+const hazardRadios = document.getElementsByName('experienced_hazard');
+  const pastHazardSection = document.getElementById('past_hazard_section');
+  const pastHazardInputs = document.getElementsByName('PAST_HAZ');
+
+  hazardRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      if (radio.value === 'yes') {
+        pastHazardSection.style.display = 'block';
+        pastHazardInputs.forEach(input => input.required = true);
+      } else {
+        pastHazardSection.style.display = 'none';
+        pastHazardInputs.forEach(input => {
+          input.required = false;
+          input.checked = false;
+        });
+      }
+    });
+  });
+  // Dynamically build severity fields
+  document.addEventListener('DOMContentLoaded', () => {
+    const severityContainer = document.getElementById('severityFields');
+
+    severityQuestions.forEach(([name, labelText]) => {
+      const label = document.createElement('label');
+      label.textContent = labelText;
+      const div = document.createElement('div');
+      div.className = 'radio-group';
+      div.id = name;
+
+      for (let i = 1; i <= 4; i++) {
+        const lbl = document.createElement('label');
+        lbl.innerHTML = `<input type="radio" name="${name}" value="${i}" required> ${i === 1 ? '(Negligible)' : i === 4 ? '(Catastrophic)' : ''} ${i}`;
+        div.appendChild(lbl);
+      }
+
+      severityContainer.appendChild(label);
+      severityContainer.appendChild(div);
+    });
+
+    // Show/hide past hazard section
+    const hazardRadios = document.getElementsByName('experienced_hazard');
+    const pastHazardSection = document.getElementById('past_hazard_section');
+    const pastHazardInputs = document.getElementsByName('PAST_HAZ');
+
+    hazardRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.value === 'yes') {
+          pastHazardSection.style.display = 'block';
+          pastHazardInputs.forEach(input => input.required = true);
+        } else {
+          pastHazardSection.style.display = 'none';
+          pastHazardInputs.forEach(input => {
+            input.required = false;
+            input.checked = false;
+          });
+        }
+      });
+    });
+
+    // Final form logic
+    document.getElementById('combinedForm').addEventListener('submit', function (e) {
+      // === SEVERITY SCORE CALCULATION ===
+      let totalSeverity = 0;
+      let countSeverity = 0;
+
+      severityQuestions.forEach(([name]) => {
+        const selected = document.querySelector(`input[name="${name}"]:checked`);
+        if (selected) {
+          totalSeverity += parseInt(selected.value);
+          countSeverity++;
+        }
+      });
+
+      const avgSeverity = countSeverity > 0 ? (totalSeverity / countSeverity).toFixed(2) : 0;
+      const severityRounded = Math.round(avgSeverity);
+      const severityLabels = {
+        1: 'Negligible',
+        2: 'Moderate',
+        3: 'Critical',
+        4: 'Catastrophic'
+      };
+      const severityLabel = severityLabels[severityRounded] || 'N/A';
+
+      document.getElementById('SEVERITY_SCORE').value = avgSeverity;
+      document.getElementById('SEVERITY_SCORE_LABEL').value = severityLabel;
+
+      // === RISK SCORE CALCULATION ===
+      const exposed = document.querySelector('input[name="EXPOSED_HAZ"]:checked');
+      const experienced = document.querySelector('input[name="experienced_hazard"]:checked');
+      const past = document.querySelector('input[name="PAST_HAZ"]:checked');
+      const immediate = document.querySelector('input[name="IMMEDIATE_HAZ"]:checked');
+
+      let riskValues = [];
+      let averageDivisor = 3;
+
+      if (exposed) riskValues.push(parseInt(exposed.value));
+      if (immediate) riskValues.push(parseInt(immediate.value));
+
+      if (experienced && experienced.value === 'yes') {
+        if (past) riskValues.push(parseInt(past.value));
+      } else {
+        averageDivisor = 2;
+      }
+
+      const riskTotal = riskValues.reduce((sum, val) => sum + val, 0);
+      const avgRisk = averageDivisor > 0 ? (riskTotal / averageDivisor).toFixed(2) : 0;
+      const riskRounded = Math.round(avgRisk);
+
+      const riskLabels = {
+        1: 'Unlikely',
+        2: 'Seldom',
+        3: 'Occasional',
+        4: 'Likely',
+        5: 'Frequent'
+      };
+      const riskLabel = riskLabels[riskRounded] || 'N/A';
+
+      document.getElementById('RISK_SCORE').value = avgRisk;
+      document.getElementById('RISK_SCORE_LABEL').value = riskLabel;
+
+      // === FINAL RISK MATRIX ===
+      const riskMatrix = {
+        'Negligible':   { 'Unlikely': 'L', 'Seldom': 'L', 'Occasional': 'L', 'Likely': 'L', 'Frequent': 'M' },
+        'Moderate':     { 'Unlikely': 'L', 'Seldom': 'L', 'Occasional': 'M', 'Likely': 'M', 'Frequent': 'H' },
+        'Critical':     { 'Unlikely': 'L', 'Seldom': 'M', 'Occasional': 'H', 'Likely': 'H', 'Frequent': 'EH' },
+        'Catastrophic': { 'Unlikely': 'M', 'Seldom': 'H', 'Occasional': 'H', 'Likely': 'EH', 'Frequent': 'EH' }
+      };
+
+      const finalRisk = (riskMatrix[severityLabel] && riskMatrix[severityLabel][riskLabel]) || 'N/A';
+      document.getElementById('FINAL_RISK_LEVEL').value = finalRisk;
+    });
+  });
+</script>
+
+
+    <button type="submit">Submit Full Record</button>
+    </div>
+  </section>
+  </form>
+  </main>
   <script src="script.js"></script>
 </body>
 </html>
