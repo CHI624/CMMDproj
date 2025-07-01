@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+<template id="hazardTemplate">
+    <div class="hazard-block" style="position:relative; margin-bottom:1rem;">
+      <h2>Hazard Description</h2>
+    <textarea name="DESCR_HAZ" rows="3" required></textarea><br/><br />
+    <!-- ... all your EXPOSED_HAZ, experienced_hazard, etc. radio groups ... -->
+
+    <!-- Hidden Input for Combined Hazard List -->
+    <h2>Risk Analysis (Probability)</h2>
+    <label for="EXPOSED_HAZ">Likelihood of exposure to the hazard:</label>
+    <div class="radio-group" id="EXPOSED_HAZ">
+      <label><input type="radio" name="EXPOSED_HAZ" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="EXPOSED_HAZ" value="2">2</label>
+      <label><input type="radio" name="EXPOSED_HAZ" value="3">3</label>
+      <label><input type="radio" name="EXPOSED_HAZ" value="4">4</label>
+      <label><input type="radio" name="EXPOSED_HAZ" value="5">(Highly Likely) 5</label>
+    </div>
+
+    <label>Have you experienced a similar hazard before?</label>
+    <div class="radio-group" id="experienced_hazard">
+      <label><input type="radio" name="experienced_hazard" value="yes" required>Yes</label>
+      <label><input type="radio" name="experienced_hazard" value="no">No</label>
+    </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const hazardRadios = document.getElementsByName('experienced_hazard');
+    const pastHazardSection = document.getElementById('past_hazard_section');
+    const pastHazardInputs = document.querySelectorAll('#past_hazard_section input');
+
+    hazardRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.value === 'yes' && radio.checked) {
+          pastHazardSection.style.display = 'block';
+          pastHazardInputs.forEach(input => input.required = true);
+        } else if (radio.value === 'no' && radio.checked) {
+          pastHazardSection.style.display = 'none';
+          pastHazardInputs.forEach(input => {
+            input.required = false;
+            if (input.type === 'radio' || input.type === 'checkbox') {
+              input.checked = false;
+            } else {
+              input.value = '';
+            }
+          });
+        }
+      });
+    });
+  });
+    function initExperiencedHazard(block) {
+    const yesNoRadios = block.querySelectorAll('input[name="experienced_hazard"]');
+    const pastSection  = block.querySelector('.past-hazard-section');
+    const pastInputs   = block.querySelectorAll('.past-hazard input');
+
+    // ensure hidden by default
+    pastSection.style.display = 'none';
+    pastInputs.forEach(i => { i.checked = false; i.required = false; });
+
+    yesNoRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.value === 'yes') {
+          pastSection.style.display = 'block';
+          pastInputs.forEach(i => i.required = true);
+        } else {
+          pastSection.style.display = 'none';
+          pastInputs.forEach(i => {
+            i.required = false;
+            i.checked = false;
+          });
+        }
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1) initialize existing blocks
+    document.querySelectorAll('.hazard-block').forEach(initExperiencedHazard);
+
+    // 2) wiring up your “Add Additional Hazard” button
+    document.getElementById('addHazardBtn')
+      .addEventListener('click', () => {
+        const container = document.getElementById('hazardsContainer');
+        const template  = container.querySelector('.hazard-block');
+        const clone     = template.cloneNode(true);
+
+        // reset any user input inside clone
+        clone.querySelectorAll('textarea, input').forEach(el => {
+          if (el.type === 'radio') el.checked = false;
+          else el.value = '';
+        });
+
+        container.appendChild(clone);
+        initExperiencedHazard(clone);       // ❶ wire up new block
+        renumberHazardsAndNames();          // ❷ if you need to re-index names/labels
+      });
+  });
+</script>
+    <div id="past_hazard_section" style="display: none;">
+      <label for="PAST_HAZ">How problematic was the previous hazard?</label>
+      <div class="radio-group" id="PAST_HAZ">
+        <label><input type="radio" name="PAST_HAZ" value="1">(Not Problematic) 1</label>
+        <label><input type="radio" name="PAST_HAZ" value="2">2</label>
+        <label><input type="radio" name="PAST_HAZ" value="3">3</label>
+        <label><input type="radio" name="PAST_HAZ" value="4">4</label>
+        <label><input type="radio" name="PAST_HAZ" value="5">(Very Problematic) 5</label>
+      </div>
+    </div>
+    <label for="IMMEDIATE_HAZ">Immediate threat to mission:</label>
+    <div class="radio-group" id="IMMEDIATE_HAZ">
+      <label><input type="radio" name="IMMEDIATE_HAZ" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="IMMEDIATE_HAZ" value="2">2</label>
+      <label><input type="radio" name="IMMEDIATE_HAZ" value="3">3</label>
+      <label><input type="radio" name="IMMEDIATE_HAZ" value="4">4</label>
+      <label><input type="radio" name="IMMEDIATE_HAZ" value="5">(Highly Likely) 5</label>
+    </div>
+
+    <!-- Severity Section -->
+    <h2>Risk Analysis (Severity)</h2>
+    <h3>Indicate the likelihood of the present hazard potentially resulting in 
+        each of the following(1-4):</h3>
+<label for="unit">Complete Mission Failure:</label><br />
+    <div class="radio-group" id="COMPLETE_MISSION">
+      <label><input type="radio" name="COMPLETE_MISSION" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="COMPLETE_MISSION" value="2"required>2</label>
+      <label><input type="radio" name="COMPLETE_MISSION" value="3"required>3</label>
+      <label><input type="radio" name="COMPLETE_MISSION" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Loss of the ability to complete the mission:</label><br />
+    <div class="radio-group" id="LOSS_MISSION">
+      <label><input type="radio" name="LOSS_MISSION" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="LOSS_MISSION" value="2"required>2</label>
+      <label><input type="radio" name="LOSS_MISSION" value="3"required>3</label>
+      <label><input type="radio" name="LOSS_MISSION" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Death:</label><br />
+    <div class="radio-group" id="DEATH">
+      <label><input type="radio" name="DEATH" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="DEATH" value="2"required>2</label>
+      <label><input type="radio" name="DEATH" value="3"required>3</label>
+      <label><input type="radio" name="DEATH" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Permanant Disability:</label><br />
+    <div class="radio-group" id="PERM_DISABILITY">
+      <label><input type="radio" name="PERM_DISABILITY" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="PERM_DISABILITY" value="2"required>2</label>
+      <label><input type="radio" name="PERM_DISABILITY" value="3"required>3</label>
+      <label><input type="radio" name="PERM_DISABILITY" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Loss of Equipment:</label><br />
+    <div class="radio-group" id="LOSS_EQUIPMENT">
+      <label><input type="radio" name="LOSS_EQUIPMENT" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="LOSS_EQUIPMENT" value="2"required>2</label>
+      <label><input type="radio" name="LOSS_EQUIPMENT" value="3"required>3</label>
+      <label><input type="radio" name="LOSS_EQUIPMENT" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Property Damage:</label><br />
+    <div class="radio-group" id="PROPERTY_DAMAGE">
+      <label><input type="radio" name="PROPERTY_DAMAGE" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="PROPERTY_DAMAGE" value="2"required>2</label>
+      <label><input type="radio" name="PROPERTY_DAMAGE" value="3"required>3</label>
+      <label><input type="radio" name="PROPERTY_DAMAGE" value="4"required>(Highly Likely) 4</label>
+    </div>
+            <label for="unit">Facility Damage:</label><br />
+    <div class="radio-group" id="FACILITY_DAMAGE">
+      <label><input type="radio" name="FACILITY_DAMAGE" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="FACILITY_DAMAGE" value="2"required>2</label>
+      <label><input type="radio" name="FACILITY_DAMAGE" value="3"required>3</label>
+      <label><input type="radio" name="FACILITY_DAMAGE" value="4"required>(Highly Likely) 4</label>
+    </div>
+    <label for="unit">Collateral Damage:</label><br />
+    <div class="radio-group" id="COLLATERAL_DAMAGE">
+      <label><input type="radio" name="COLLATERAL_DAMAGE" value="1" required>(Highly Unlikely) 1</label>
+      <label><input type="radio" name="COLLATERAL_DAMAGE" value="2"required>2</label>
+      <label><input type="radio" name="COLLATERAL_DAMAGE" value="3"required>3</label>
+      <label><input type="radio" name="COLLATERAL_DAMAGE" value="4"required>(Highly Likely) 4</label>
+    </div>
+    <button type="button" id="addHazardBtn">Add Additional Hazard</button><br/><br />
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container     = document.getElementById('hazardsContainer');
+  const addBtn        = document.getElementById('addHazardBtn');
+  const numHazInput   = document.getElementById('NUM_HAZ');
+  const template      = document.getElementById('hazardTemplate');
+  const combined      = document.getElementById('COMBINED_HAZARDS');
+
+  // Track how many hazard blocks exist
+  let hazardCount = 0;
+  function setHazardCount(n) {
+    hazardCount = n;
+    numHazInput.value = hazardCount;
+  }
+
+  // Function to inject a remove button into a block
+  function injectRemove(block) {
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.innerHTML = '&times;';
+    removeBtn.title = 'Remove this hazard';
+    removeBtn.style.cssText = 'position:absolute; top:0.5rem; right:0.5rem; font-size:1.2rem; color:#c00; background:none; border:none; cursor:pointer;';
+    removeBtn.addEventListener('click', () => {
+      block.remove();
+      setHazardCount(hazardCount - 1);
+    });
+    block.style.position = 'relative';
+    block.appendChild(removeBtn);
+  }
+
+  // Function to add a new hazard block from the template
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('hazardsContainer');
+  const template = document.getElementById('hazardTemplate');
+  
+  function addBtn() {
+    const clone = template.content.cloneNode(true);
+    const block = clone.querySelector('.hazard-block');
+    container.appendChild(clone);
+    // ...any other setup logic
+  }
+
+  addBtn(); // Start with one
+});
+
+  // Bind the add hazard button
+  addBtn.addEventListener('click', addBtn);
+
+  // On form submit, gather combined descriptions
+  document.getElementById('combinedForm').addEventListener('submit', () => {
+    const texts = Array
+      .from(container.querySelectorAll('textarea[name="DESCR_HAZ"]'))
+      .map(t => t.value.trim())
+      .filter(v => v)
+      .map(v => `• ${v}`);
+    combined.value = texts.join('\n');
+  });
+});
+</script>
+
+<script>
+  // 1) Declare these ONCE, globally:
+  const allSingleLetters   = [];
+  const allSeverityAvgs    = [];
+  const allSeverityLabels  = [];
+  const allRiskAvgs        = [];
+  const allRiskLabels      = [];
+
+  // 2) Your label maps & matrix:
+  const severityLabels = {
+    1: 'Negligible',
+    2: 'Moderate',
+    3: 'Critical',
+    4: 'Catastrophic'
+  };
+  const riskLabels = {
+    1: 'Unlikely',
+    2: 'Seldom',
+    3: 'Occasional',
+    4: 'Likely',
+    5: 'Frequent'
+  };
+  const riskMatrix = {
+    'Negligible':   { 'Unlikely':'L','Seldom':'L','Occasional':'L','Likely':'L','Frequent':'M' },
+    'Moderate':     { 'Unlikely':'L','Seldom':'L','Occasional':'M','Likely':'M','Frequent':'H' },
+    'Critical':     { 'Unlikely':'L','Seldom':'M','Occasional':'H','Likely':'H','Frequent':'EH' },
+    'Catastrophic': { 'Unlikely':'M','Seldom':'H','Occasional':'H','Likely':'EH','Frequent':'EH' }
+  };
+
+  // 3) Utility to compute one block’s scores and push onto our arrays:
+  function recordBlockScores(block) {
+    // Severity:
+    const sevNames = ['COMPLETE_MISSION','LOSS_MISSION','DEATH','PERM_DISABILITY',
+                      'LOSS_EQUIPMENT','PROPERTY_DAMAGE','FACILITY_DAMAGE','COLLATERAL_DAMAGE'];
+    let svSum=0, svCount=0;
+    sevNames.forEach(name=>{
+      const inp = block.querySelector(`input[name="${name}"]:checked`);
+      if (inp) { svSum += +inp.value; svCount++; }
+    });
+    const avgSv = svCount ? svSum/svCount : 0;
+    const rvdSv = Math.round(avgSv);
+    const lblSv = severityLabels[rvdSv] || 'N/A';
+
+    // Risk:
+    const get = n=> {
+      const i = block.querySelector(`input[name="${n}"]:checked`);
+      return i ? +i.value : null;
+    };
+    const ex = get('EXPOSED_HAZ'),
+          im = get('IMMEDIATE_HAZ'),
+          yesBefore = block.querySelector('input[name="experienced_hazard"][value="yes"]')?.checked,
+          pt = yesBefore ? get('PAST_HAZ') : null;
+
+    const vals = [ex,im].filter(v=>v!==null);
+    if (pt!==null) vals.push(pt);
+    const divisor = pt!==null ? 3 : 2;
+    const sumR = vals.reduce((a,b)=>a+b,0);
+    const avgR = divisor>0 ? sumR/divisor : 0;
+    const rvdR = Math.round(avgR);
+    const lblR = riskLabels[rvdR] || 'N/A';
+
+    // Final single‐letter:
+    const single = (riskMatrix[lblSv]||{})[lblR]||'N/A';
+
+    // Push into our persistent arrays:
+    allSingleLetters.push(single);
+    allSeverityAvgs.push(avgSv.toFixed(2));
+    allSeverityLabels.push(lblSv);
+    allRiskAvgs.push(avgR.toFixed(2));
+    allRiskLabels.push(lblR);
+  }
+
+  // 4) Hook “Add Additional Hazard” so it *doesn't* clear those arrays:
+  document.getElementById('addHazardBtn').addEventListener('click', () => {
+    // …your existing code to clone & insert a new .hazard-block…
+    // **DON’T** reset allSingleLetters etc. here.
+  });
+
+  // 5) On final submit, loop over each block *once*, record scores, then write out the lists:
+  document.getElementById('combinedForm').addEventListener('submit', function(e) {
+    // First, for every existing .hazard-block, record its scores:
+    document.querySelectorAll('.hazard-block').forEach(block =>{
+      recordBlockScores(block);
+    });
+
+    // Then write the final comma-separated lists into your hidden inputs:
+    document.getElementById('SINGLE_RISK_SCORE').value     = allSingleLetters.join(', ');
+    document.getElementById('SEVERITY_SCORE').value       = allSeverityAvgs.join(', ');
+    document.getElementById('SEVERITY_SCORE_LABEL').value = allSeverityLabels.join(', ');
+    document.getElementById('RISK_SCORE').value           = allRiskAvgs.join(', ');
+    document.getElementById('RISK_SCORE_LABEL').value     = allRiskLabels.join(', ');
+
+    // And compute & store the collective final risk letter:
+    const totSv = allSeverityAvgs.reduce((s,v)=>s+parseFloat(v),0);
+    const totR  = allRiskAvgs.reduce((s,v)=>s+parseFloat(v),0);
+    const avgSvAll = allSeverityAvgs.length ? totSv/allSeverityAvgs.length : 0;
+    const avgRAll  = allRiskAvgs.length     ? totR/allRiskAvgs.length       : 0;
+    const finalSvLbl = severityLabels[Math.round(avgSvAll)] || 'N/A';
+    const finalRkLbl = riskLabels[Math.round(avgRAll)]       || 'N/A';
+    const finalCollective = (riskMatrix[finalSvLbl]||{})[finalRkLbl]||'N/A';
+    document.getElementById('FINAL_RISK_LEVEL').value = finalCollective;
+  });
+</script>
+<button type="submit">Submit Full Record</button>
+    </div>
+    </template>
+</body>
+    </html>

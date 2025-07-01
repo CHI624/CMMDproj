@@ -37,6 +37,8 @@ document.querySelector("form").addEventListener("submit", function (e) {
       hasError = true;
     }
   });
+
+
   const radioGroups = ["C2_PER_COM", "C2_OPER_EX"];
   radioGroups.forEach(id => {
     const group = document.getElementById(id);

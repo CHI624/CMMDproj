@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ARMOR | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    /* Reset & base */
+    * { margin:0; padding:0; box-sizing:border-box }
+    body, html { height:100%; font-family: 'Poppins', sans-serif; }
+
+    /* 1) Creative header with diagonal bottom edge */
+    .site-header {
+      position: relative;
+      background: linear-gradient(135deg,#004a99,#007aff);
+      color:#fff;
+      clip-path: polygon(0 0,100% 0,100% 75%,0 100%);
+    }
+    .site-header .header-content {
+      max-width: 1200px; margin: auto; padding: 2rem;
+      display: flex; align-items:center; justify-content:space-between;
+    }
+    .site-header .logo {
+      display:flex; align-items:center; text-decoration:none; color:#fff;
+    }
+    .site-header .logo-icon { height:50px; margin-right:1rem; }
+    .site-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size:2.5rem; letter-spacing:2px;
+    }
+    .site-header .nav-menu a {
+      margin-left:1.5rem; text-decoration:none; color:#fff;
+      font-weight:500; position:relative;
+    }
+    .site-header .nav-menu a::after {
+      content:''; display:block; height:2px; background:#fff;
+      width:0; transition:width .3s;
+      position:absolute; bottom:-4px; left:0;
+    }
+    .site-header .nav-menu a:hover::after { width:100%; }
+
+    /* 2) Split‐screen with videos */
+    .split {
+      display:grid; grid-template-columns:1fr 1fr; height:calc(100% - 150px);
+    }
+    .panel {
+      position:relative; overflow:hidden;
+    }
+    .panel video {
+      position:absolute; top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      min-width:100%; min-height:100%;
+      object-fit:cover; opacity:0.6;
+    }
+    .panel .overlay {
+      position:relative; z-index:1;
+      display:flex; align-items:center; justify-content:center;
+      height:100%; color:#fff;
+    }
+    .panel .overlay button {
+      padding:1rem 2rem; font-size:1.25rem;
+      background:rgba(5, 157, 222, 0.949); border:none;
+      border-radius:8px; color:#fff; cursor:pointer;
+      transition:background .3s;
+    }
+    .panel .overlay button:hover {
+      background:rgba(4, 41, 128, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-content">
+      <a href="ARMOR_HOME.html" class="logo">
+        <img src="Photos_Videos/DOD logo.png" alt="CMMD Logo" class="logo-icon">
+        <h1>ETI</h1>
+      </a>
+      <nav class="nav-menu">
+        <a href="ARMOR_HOME.html">Home</a>
+        <a href="index.html">ARMOR</a>
+        <a href="ARMOR_QUER.html">CMMD</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="split">
+    <section class="panel">
+      <video src="path/to/video1.mp4" autoplay muted loop></video>
+      <div class="overlay">
+        <button onclick="location.href='index.html'">Enter ARMOR</button>
+      </div>
+    </section>
+    <section class="panel">
+      <video src="path/to/video2.mp4" autoplay muted loop></video>
+      <div class="overlay">
+        <button onclick="location.href='app.py'">Enter CMMD</button>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
+
