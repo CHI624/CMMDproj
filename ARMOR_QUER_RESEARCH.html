@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website Name | Home</title>
+    
+    <!-- Google Fonts for aesthetics -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- Your Custom Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="header-content">
+        <a href ="index.html" class="logo">
+            <img src="Photos_Videos/DOD logo.png" alt="CMMD Logo" class="logo-icon">
+        <h1>ARMOR</h1>
+        </a>
+        <nav class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="CMMD_risk_choice.php">ARMOR</a>
+            <a href="ARMOR_QUER.html">ARMOR ANALYSIS</a>
+            <a href="about.html">About</a>
+            <a href="projects.html">Projects</a>
+            </nav>
+    </div>
+</header>
+<head>
+    <body>
+<style>
+#JOB {
+  width: 300px;           /* fixed width */
+  padding: 8px 12px;      /* some breathing room */
+  font-size: 16px;        /* readable text size */
+  border: 1.5px solid #888;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 21px;
+}
+
+#JOB:hover {
+  border-color: #005fcc;
+  box-shadow: 0 2px 10px rgba(0,95,204,0.3);
+}
+
+#JOB:focus {
+  outline: none;
+  border-color: #004a99;
+  box-shadow: 0 0 8px rgba(0,74,153,0.8);
+}
+
+</style>
+  <div id="welcome-screen" class="fade-screen">
+    <h1>Welcome to the ARMOR ANALYSIS</h1>
+  </div> 
+<main id="main-content">
+    <h2>Please Fill Out the Form</h2>
+    <form id = "combinedForm" method="POST" action="/CMMDproj/quer_submit_researcher.php">
+     <section id = "form1">
+    <label for="name">Researcher Name:</label><br />
+    <input type="text" id="RESEARCHER_N" name="RESEARCHER_N" required /><br /><br />
+
+<label for="rank">JOB (MOS#/NAME):</label><br />
+<select id="JOB" name="JOB" required>
+  <option value="">-- Select MOS and Name --</option>
+</select>
+
+<script>
+fetch('roles_table.csv')
+  .then(response => {
+    if (!response.ok) throw new Error('Network response was not ok');
+    return response.text();
+  })
+  .then(text => {
+    const lines = text.trim().split('\n');
+    for(let i = 1; i < lines.length; i++) {
+      // Split on comma, but trim spaces just in case
+      const [Mos, Name] = lines[i].split('|').map(s => s.trim());
+      if(Mos && Name) {
+        const optionValue = `${Mos} ${Name}`;
+        const option =  document.createElement('option');
+        option.value = optionValue;
+        option.textContent = optionValue;
+        document.getElementById('JOB').appendChild(option);
+      }
+    }
+  })
+  .catch(err => console.error('Error loading CSV:', err));
+</script>
+<label for="mission_image">Select an image in relation to Query:</label><br />
+        <input type="file" id="QUER_IMAGE" name="QUER_IMAGE" accept="image/*" /><br /><br />
+<label for="mission_audio">Select an image in relation to Query:</label><br />
+        <input type="file" id="QUER_AUDIO" name="QUER_AUDIO" accept="audio/*" /><br /><br />
+    <label for="name">JOB DESCRIPTION:</label><br />
+    <input type="text" id="JOB_DESCR" name="JOB_DESCR" required /><br /><br />
+    <div id="hazardContainer">
+  <div class="hazard-block">
+    <label for="name" class="haz-label-1">IDENTIFY(MAIN HAZARD):</label><br />
+    <input type="text" id="MAIN_HAZ" name="MAIN_HAZ" required /><br /><br />
+        <label for="name" class="haz-label-2">DESCRIPTION OF MAIN HAZARD:</label><br />
+    <input type="text" id="DESCR_MAIN" name="DESCR_MAIN" required /><br /><br />
+        <label for="name" class="haz-label-3">HAZARD LOCATION:</label><br />
+    <input type="text" id="HAZ_LOC" name="HAZ_LOC" required /><br /><br />
+    </div>
+    </div>   
+    <button type="button" id = "addHazardBtn">ADD MORE HAZARDS</button>
+    <input type="hidden" name="hazardsList" id="hazardsList" />
+    <button type="submit">Next Page</button>
+
+
+</select>
+    </section>
+    </form>
+    </main>
+    <script src="script.js"></script>
+    <script>
+  const container = document.getElementById('hazardContainer');
+  const addBtn = document.getElementById('addHazardBtn');
+
+  addBtn.addEventListener('click', () => {
+    const blocks = container.querySelectorAll('.hazard-block');
+    const original = blocks[0];
+    const clone = original.cloneNode(true);
+
+    // Clear input values
+    clone.querySelectorAll('input').forEach(input => input.value = '');
+
+    // Update label text to say "SUBHAZARD" instead of "MAIN HAZARD"
+    clone.querySelector('.haz-label-1').textContent = 'IDENTIFY (SUBHAZARD):';
+    clone.querySelector('.haz-label-2').textContent = 'DESCRIPTION OF SUBHAZARD:';
+    clone.querySelector('.haz-label-3').textContent = 'SUBHAZARD LOCATION:';
+
+    // Add remove button
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.textContent = '× Remove';
+    removeBtn.style.cssText = `
+      background: red; color: white;
+      border: none; padding: 0.5rem 1rem;
+      cursor: pointer; margin-top: 5px;
+    `;
+
+    removeBtn.addEventListener('click', () => {
+      clone.remove();
+    });
+
+    clone.appendChild(removeBtn);
+    container.appendChild(clone);
+  });
+</script>
+<script>
+    const hazardForm = document.querySelector('form');  // or give it an ID
+
+hazardForm.addEventListener('submit', e => {
+  // 1. Gather all hazard-blocks
+  const blocks = document.querySelectorAll('.hazard-block');
+  const list = [];
+
+  blocks.forEach(block => {
+    const main = block.querySelector('#MAIN_HAZ').value.trim();
+    const desc = block.querySelector('#DESCR_MAIN').value.trim();
+    const loc  = block.querySelector('#HAZ_LOC').value.trim();
+
+    if (main || desc || loc) {
+      list.push({ main_hazard: main, description: desc, location: loc });
+    }
+  });
+
+  // 2. JSON‑encode into the hidden input
+  document.getElementById('hazardsList').value = JSON.stringify(list);
+
+  // 3. Let the form submit normally
+});
+</script>
+    </body>
+    </html>
