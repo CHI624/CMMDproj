@@ -1,10 +1,11 @@
 <?php
 session_start();
-$host = "localhost";
+$host = "db-mysql-nyc3-19913-do-user-23595991-0.m.db.ondigitalocean.com";
+$port = 25060; // usually this for MySQL on DigitalOcean
 $db = "form_submissions_asess";
-$user = "root";
-$pass = "Dabonem123!";
-$conn = new mysqli($host, $user, $pass, $db);
+$user = "doadmin";
+$pass = "AVNS__Tm7x5axtN8phP_O_m9";
+$conn = new mysqli($host, $user, $pass, $db, $port);
 
 // Check DB connection
 if ($conn->connect_error) {
