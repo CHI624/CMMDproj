@@ -15,7 +15,7 @@ $zipPath = "/Applications/XAMPP/htdocs/CMMDproj/army_man_text.zip";
 
 // Sanitize and assign POST values
 $C2_PER_EX        = $_POST['C2_PER_EX']        ?? '';
-$RANK             = $_POST['RANK']             ?? '';
+$USER_RANK             = $_POST['USER_RANK']             ?? '';
 $YEARS_EX       = $_POST['YEARS_EX']       ?? '';
 $NUM_HAZ     = $_POST['NUM_HAZ']    ?? ''; // Count number of hazards
 $COMBINED_HAZARDS    = $_POST['COMBINED_HAZARDS']    ?? '';
@@ -38,7 +38,7 @@ $USER_ID   = $_POST['USER_ID']   ?? '';
 $ASSET_TAG = $_POST['ASSET_TAG'] ?? '';
 // Prepare SQL insert with prepared statement
 $sql = "INSERT INTO form_submissions (
-    USER_ID, ASSET_TAG, C2_PER_EX, RANK, YEARS_EX, DESCR_HAZ,
+    USER_ID, ASSET_TAG, C2_PER_EX, USER_RANK, YEARS_EX, DESCR_HAZ,
     RISK_SCORE, SINGLE_RISK_SCORE, SEVERITY_SCORE, EXPOSED_HAZ, PAST_HAZ, IMMEDIATE_HAZ,
     COMPLETE_MISSION, LOSS_MISSION, DEATH, PERM_DISABILITY, LOSS_EQUIPMENT, PROPERTY_DAMAGE, FACILITY_DAMAGE, COLLATERAL_DAMAGE, NUM_HAZ, COMBINED_HAZARDS
 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -52,7 +52,7 @@ if (!$stmt) {
     // Prepare the statement per loop (or just bind again if prepared outside)
     $stmt->bind_param(
         "ssssssssssssssssssssds",
-        $USER_ID, $ASSET_TAG, $C2_PER_EX, $RANK, $YEARS_EX, $DESCR_HAZ,
+        $USER_ID, $ASSET_TAG, $C2_PER_EX, $USER_RANK, $YEARS_EX, $DESCR_HAZ,
         $RISK_SCORE, $SINGLE_RISK_SCORE, $SEVERITY_SCORE, $EXPOSED_HAZ, $PAST_HAZ, $IMMEDIATE_HAZ, $COMPLETE_MISSION, 
         $LOSS_MISSION, $DEATH, $PERM_DISABILITY, $LOSS_EQUIPMENT, $PROPERTY_DAMAGE, 
         $FACILITY_DAMAGE, $COLLATERAL_DAMAGE, $NUM_HAZ, $COMBINED_HAZARDS
