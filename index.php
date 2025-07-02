@@ -223,6 +223,14 @@ fetch('organized_civ_rank1.csv')
   .catch(err => console.error('Error loading CSV:', err));
 </script>
 <style>
+    label[for="rank"] {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 21px;
+    font-family: "Poppins", "sans-serif";
+    font-size: 14px;
+    color:rgb(234, 216, 20);
+  }
   #USER_RANK {
      width: 300px;           /* fixed width */
   padding: 8px 12px;      /* some breathing room */
