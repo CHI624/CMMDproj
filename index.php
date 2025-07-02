@@ -224,7 +224,7 @@ fetch('organized_civ_rank1.csv')
   .catch(err => console.error('Error loading CSV:', err));
 </script>
       <label for="rank">RANK(Enlisted, Officer, Warrant Officer):</label><br />
-      <select id="RANK" name="RANK" required>
+      <select id="USER_RANK" name="USER_RANK" required>
       <option value ="">-- Select Rank --</option>
       <option value="Civilian">Civilian(No Rank)</option>
       <option value="Private">Private</option>
@@ -590,7 +590,7 @@ backBtn.addEventListener('click', () => {
   document.getElementById('form2').style.display = 'none';
   document.getElementById('form1').style.display = 'block';
 });
-const rank = document.querySelector('select[name="RANK"]');
+const rank = document.querySelector('select[name="USER_RANK"]');
 if (!rank || !rank.value.trim()) {
   alert('Please select your rank.');
   return;
@@ -684,7 +684,7 @@ nextBtn.addEventListener('click', async () => {
   const formData = new FormData(document.getElementById('combinedForm'));
 
   // b1) global fields (CONSENT, RANK, etc.)
-  ['C2_PER_EX','RANK','YEARS_EX','NUM_HAZ','COMBINED_HAZARDS']
+  ['C2_PER_EX','USER_RANK','YEARS_EX','NUM_HAZ','COMBINED_HAZARDS']
     .forEach(name => {
       const el = document.querySelector(`[name="${name}"]`);
       if (el) formData.append(name, el.value);
@@ -799,7 +799,7 @@ submitBtn.addEventListener('click', async () => {
   const formData = new FormData(document.getElementById('combinedForm'));
 
   // Global fields
-  ['C2_PER_EX','RANK','YEARS_EX','NUM_HAZ','COMBINED_HAZARDS'].forEach(name => {
+  ['C2_PER_EX','USER_RANK','YEARS_EX','NUM_HAZ','COMBINED_HAZARDS'].forEach(name => {
     const el = document.querySelector(`[name="${name}"]`);
     if (el) formData.append(name, el.value);
   });
