@@ -4,7 +4,6 @@ session_start();
 if (!isset($_SESSION['USER_ID'])) {
     $_SESSION['USER_ID'] = uniqid('user_', true); // e.g. user_662bc9f18b3227.51912434
 }
-
 // 🔹 Define asset tags
 $assetTags = [
     'FI_1.jpeg'             => 'FP',
