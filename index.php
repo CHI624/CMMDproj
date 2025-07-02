@@ -234,30 +234,25 @@ fetch('organized_civ_rank1.csv')
   }
 
   #USER_RANK {
-    width: 100%;
-    max-width: 400px;
-    padding: 10px 12px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #f9f9f9;
-    color: #333;
-    font-family: Arial, sans-serif;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 16px;
-    cursor: pointer;
-    transition: border-color 0.3s ease;
+     width: 300px;           /* fixed width */
+  padding: 8px 12px;      /* some breathing room */
+  font-size: 16px;        /* readable text size */
+  border: 1.5px solid #888;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 21px;
   }
-
-  #USER_RANK:focus {
-    outline: none;
-    border-color: #007bff;
-    background-color: #fff;
+#USER_RANK:hover{
+    border-color: #005fcc;
+  box-shadow: 0 2px 10px rgba(0,95,204,0.3);
+}
+    #USER_RANK:focus {
+   outline: none;
+  border-color: #004a99;
+  box-shadow: 0 0 8px rgba(0,74,153,0.8);
   }
 </style>
       <label for="rank">RANK(Enlisted, Officer, Warrant Officer):</label><br />
