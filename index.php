@@ -223,6 +223,43 @@ fetch('organized_civ_rank1.csv')
   })
   .catch(err => console.error('Error loading CSV:', err));
 </script>
+<style>
+  label[for="rank"] {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+  }
+
+  #USER_RANK {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    color: #333;
+    font-family: Arial, sans-serif;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='16' viewBox='0 0 24 24' width='16' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+  }
+
+  #USER_RANK:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #fff;
+  }
+</style>
       <label for="rank">RANK(Enlisted, Officer, Warrant Officer):</label><br />
       <select id="USER_RANK" name="USER_RANK" required>
       <option value ="">-- Select Rank --</option>
