@@ -664,6 +664,33 @@ button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
+#USER_RANK {
+  width: 300px;           /* fixed width */
+  padding: 8px 12px;      /* some breathing room */
+  font-size: 16px;        /* readable text size */
+  border: 1.5px solid #888;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 21px;
+}
+
+#USER_RANK:hover {
+  border-color: #005fcc;
+  box-shadow: 0 2px 10px rgba(0,95,204,0.3);
+}
+
+#USER_RANK:focus {
+  outline: none;
+  border-color: #004a99;
+  box-shadow: 0 0 8px rgba(0,74,153,0.8);
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
 #form2 body {
   font-family: 'Futura', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #ab1717;
