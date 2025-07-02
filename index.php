@@ -224,12 +224,10 @@ fetch('organized_civ_rank1.csv')
 </script>
 <style>
     label[for="rank"] {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 21px;
-    font-family: "Poppins", "sans-serif";
-    font-size: 14px;
-    color:rgb(234, 216, 20);
+     font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+  color:rgb(213, 216, 18);
   }
   #USER_RANK {
      width: 300px;           /* fixed width */
@@ -241,7 +239,7 @@ fetch('organized_civ_rank1.csv')
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  margin-bottom: 21px;
+  margin-bottom: 25px;
   }
 #USER_RANK:hover{
     border-color: #005fcc;
