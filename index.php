@@ -789,7 +789,7 @@ formData.append('SINGLE_RISK_SCORE', single);
 
   // c) send to PHP
   try {
-    const resp = await fetch('/CMMDproj/ASESS_SUBMIT.php', {
+    const resp = await fetch('/ASESS_SUBMIT.php', {
       method:'POST',
       body:  formData
     });
@@ -904,7 +904,7 @@ formData.append('RISK_SCORE_LABEL', lblR);
 formData.append('SINGLE_RISK_SCORE', single);
   // c) POST to backend
   try {
-    const resp = await fetch('/CMMDproj/ASESS_SUBMIT.php', {
+    const resp = await fetch('/ASESS_SUBMIT.php', {
       method: 'POST',
       body:   formData
     });
