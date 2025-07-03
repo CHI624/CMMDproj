@@ -890,9 +890,9 @@ const lblR = riskLabels[Math.round(avgR)] || 'N/A';
 const single = (riskMatrix[lblSv] || {})[lblR] || 'N/A';
 
 // ✅ Add to form data
-formData.append('SEVERITY_SCORE', avgSv.toFixed(2));
+formData.append('SEVERITY_SCORE', isNaN(avgSv) ? '0.00' : avgSv.toFixed(2));
 formData.append('SEVERITY_SCORE_LABEL', lblSv);
-formData.append('RISK_SCORE', avgR.toFixed(2));
+formData.append('RISK_SCORE', isNaN(avgR) ? '0.00' : avgR.toFixed(2));
 formData.append('RISK_SCORE_LABEL', lblR);
 formData.append('SINGLE_RISK_SCORE', single);
   // c) POST to backend
