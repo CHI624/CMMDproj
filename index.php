@@ -766,7 +766,8 @@ const pt = getVal('PAST_HAZ');
 
 const riskVotes = [ex, im];
 if (pt !== null) riskVotes.push(pt);
-const avgR = riskVotes.reduce((a, b) => a + b, 0) / riskVotes.length;
+const validRisks = riskVotes.filter(v => typeof v === 'number' && !isNaN(v));
+const avgR = validRisks.length ? validRisks.reduce((a, b) => a + b, 0) / validRisks.length : 0;
 const lblR = riskLabels[Math.round(avgR)] || 'N/A';
 
 const single = (riskMatrix[lblSv] || {})[lblR] || 'N/A';
@@ -882,7 +883,8 @@ const pt = getVal('PAST_HAZ');
 const riskVotes = [ex, im];
 if (pt !== null) riskVotes.push(pt);
 
-const avgR = riskVotes.reduce((a, b) => a + b, 0) / riskVotes.length;
+const validRisks = riskVotes.filter(v => typeof v === 'number' && !isNaN(v));
+const avgR = validRisks.length ? validRisks.reduce((a, b) => a + b, 0) / validRisks.length : 0;
 const lblR = riskLabels[Math.round(avgR)] || 'N/A';
 
 const single = (riskMatrix[lblSv] || {})[lblR] || 'N/A';
