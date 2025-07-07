@@ -184,7 +184,7 @@ button:disabled {
     <h2>Thank you for agreeing to take part in the following survey. For this survey, you will be 
       presented with an image, a short vignette, or both which will then be followed by a hazard that is
       present within. Please answer each of the questions pertaining to the hazard. After answering all
-      questions, press the buttton to continue on to the next hazard. A total of 5 hazards will be    
+      questions, press the button to continue on to the next hazard. A total of 5 hazards will be    
       presented to you for the image or text. Additionally, we will be collecting a few minor
       demographic items for use in our analysis.
 
