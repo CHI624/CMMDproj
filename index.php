@@ -7,10 +7,10 @@ if (!isset($_SESSION['USER_ID'])) {
 // 🔹 Define asset tags
 $assetTags = [
     'FI_1.jpeg'             => 'FP',
-    'GroundMine.jpg'        => 'GMP',
+    'groundmines.jpg'        => 'GMP',
     'Tactical_Road_M_text.png' => 'GMT',
     'Fires_text.png'        => 'FT',
-    'GROUND_MINES.png'      => 'GMPT',
+    'Groundmine_photo_text.png'      => 'GMPT',
     'CALI_FIRES.png'        => 'FPT',
 ];
 
@@ -26,7 +26,7 @@ $assets = [
         'Falling Debris'
       ]
     ],
-    __DIR__ . '/Photos_Videos/GroundMine.jpg' => [
+    __DIR__ . '/Photos_Videos/groundmines.jpg' => [
       'caption' => 'Orange: Bright and full of vitamin C.',
       'hazards' => [
         'Land Mines',
@@ -56,7 +56,7 @@ $assets = [
         'Falling Debris'
       ]
     ],
-    __DIR__ . '/Photos_Videos/GROUND_MINES.png' => [
+    __DIR__ . '/Photos_Videos/Groundmine_photo_text.png' => [
       'caption' => 'ADP 1-01: Outlines the Army Profession.',
       'hazards' => [
         'Land Mines',
