@@ -181,10 +181,10 @@ button:disabled {
         <button type="button" id="Thankyou_button">Next</button>
   </section>
   <section id="thankyou" style="display:none">
-    <h2>Thank you for agreeing to take part in the following survey. For this survey, you will be 
-      presented with an image, a short vignette, or both which will then be followed by a hazard that is
+    <h2>Thank you for agreeing to take part in the following survey. For this survey, Imagine that you are a soilder or a first responder tasked with ensuring the safety of the area. 
+      You will be presented with an image, a short vignette, or both which will then be followed by a hazard that is
       present within. Please answer each of the questions pertaining to the hazard. After answering all
-      questions, press the button to continue on to the next hazard. A total of 5 hazards will be    
+      questions, press the buttton to continue on to the next hazard. A total of 5 hazards will be    
       presented to you for the image or text. Additionally, we will be collecting a few minor
       demographic items for use in our analysis.
 
@@ -251,9 +251,9 @@ fetch('organized_civ_rank1.csv')
   box-shadow: 0 0 8px rgba(0,74,153,0.8);
   }
 </style>
-      <label for="rank">RANK(Enlisted, Officer, Warrant Officer):</label><br />
+      <label for="rank">STATUS(Enlisted, Officer, Warrant Officer):</label><br />
       <select id="USER_RANK" name="USER_RANK" required>
-      <option value ="">-- Select Rank --</option>
+      <option value ="">-- Select Status --</option>
       <option value="Civilian">Civilian(No Rank)</option>
       <option value="Private">Private</option>
       <option value="Private First Class">Private First Class</option>
